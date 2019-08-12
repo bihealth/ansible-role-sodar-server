@@ -1,0 +1,12 @@
+---
+
+# Also see the defaults of bihealth.sodar_core_app.
+
+# Git repository to get app from.
+sodar_git_repo: "git@cubi-gitlab.bihealth.org:CUBI_Engineering/CUBI_Data_Mgmt/sodar.git"
+
+# Tag to use for email prefix.
+sodar_email_prefix: "[SODAR]"
+
+# Number of celery workers to spawn for the default queue.
+sodar_celery_workers: 8

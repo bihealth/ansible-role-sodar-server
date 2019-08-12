@@ -1,0 +1,17 @@
+---
+
+# bihealth.sodar_core_app -------------------------------------------------------------------------
+
+sodar_core_app_name: sodar
+sodar_core_app_git_repo: "{{ sodar_git_repo }}"
+sodar_core_app_email_prefix: "{{ sodar_email_prefix }}"
+sodar_core_app_celery_enabled: true
+sodar_core_app_celery_workers_default: "{{ sodar_celery_workers }}"
+sodar_core_app_build_docs: true
+sodar_core_vuejs_apps:
+  - samplesheets
+
+# bihealth.python3 --------------------------------------------------------------------------------
+
+python3_versions:
+  - 3.6

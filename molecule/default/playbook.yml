@@ -1,0 +1,72 @@
+---
+
+- name: Converge
+  hosts: all
+  pre_tasks:
+    # package setup
+    - name: update package repository (Debian)
+      apt: update_cache=true
+      when: ansible_os_family == "Debian"
+      changed_when: false  # hack for idempotency
+    - name: update package repository (Red Hat)
+      yum: update_cache=true
+      when: ansible_os_family == "RedHat"
+      changed_when: false  # hack for idempotency
+    - name: install netstat (Debian/Red Hat)
+      package: name=net-tools state=present
+      when: >
+        ansible_os_family == "Debian" or
+        ansible_os_family == "RedHat"
+    # basic setup / fixes
+    - name: basic server setup (includes locale)
+      include_role:
+        name: bihealth.basic_server
+    # postgres setup
+    - name: install postgres
+      include_role:
+        name: bihealth.postgres_server
+    - name: create postgres user
+      # for some reason, postgresql_user model fails in peer authentication
+      shell: |
+        set -eo pipefail
+        sudo -u postgres createuser sodar-test -w -s -d
+        sudo -u postgres \
+          psql -c \
+          "ALTER USER \"sodar-test\" WITH ENCRYPTED PASSWORD 'sodar-test';"
+        sudo -u postgres createdb -O sodar-test -E UTF-8 -l en_US.UTF-8 -T template0 \
+          sodar-test
+        touch /root/.pg_user_created
+      args:
+        executable: /bin/bash
+        creates: /root/.pg_user_created
+  vars:
+    # bihealth.sodar_core_app ---------------------------------------------------------------------
+    sodar_core_app_version: "v0.5.1"
+    sodar_core_app_django_secret_key: "SOMESECRETKEYSOMESECRETKEYSOMESECRETKEYSOMESECRETKEY"
+    sodar_core_app_superuser_password: "junkpass"
+    sodar_core_app_enable_no_log: false
+    sodar_core_app_webserver_workers: 1
+    # bihealth.sodar_server ---------------------------------------------------
+    sodar_celery_workers: 1
+    # bihealth.ssh_keys -------------------------------------------------------
+    ssh_keys_user_keys:
+      - user: root
+        private_key: "{{ lookup('env', 'ROOT_SSH_KEY_PRIVATE')|b64decode }}"
+        public_key: "{{ lookup('env', 'ROOT_SSH_KEY_PUBLIC')|b64decode }}"
+    # bihealth.ssl_certs ------------------------------------------------------
+    ssl_certs_certs:
+      - name: instance{{ lookup('env', 'CI_JOB_ID', errors='ignore') }}
+    # bihealth.postgres_server ------------------------------------------------
+    postgres_server_version: "11"
+    postgres_server_max_worker_processes: 2
+    postgres_server_max_parallel_maintenance_workers: 1
+    postgres_server_max_parallel_workers_per_gather: 1
+    postgres_server_max_parallel_workers: 1
+    # bihealth.postgres_client ------------------------------------------------
+    postgres_client_host: 127.0.0.1
+    postgres_client_db: sodar-test
+    postgres_client_user: sodar-test
+    postgres_client_password: sodar-test
+  roles:
+    - role: bihealth.ssh_keys
+    - role: ansible-role-sodar-server

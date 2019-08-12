@@ -1,0 +1,57 @@
+# For now we need to run the actual tests on our private Gitlab CI instance
+# until the SODAR source code is published.
+---
+
+stages:
+  - test
+
+services:
+  - docker:dind
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.pip"
+
+cache:
+  paths:
+    - .pip/
+    - virtenv/
+
+before_script:
+  # set build essentials
+  - apk add --no-cache build-base libffi libffi-dev openssl openssl-dev git
+  # setup pip
+  - apk add --no-cache python3 python3-dev
+  - if [ ! -e /usr/bin/python ]; then ln -sf python3 /usr/bin/python ; fi
+  - python3 -m ensurepip
+  - rm -r /usr/lib/python*/ensurepip
+  - pip3 install --no-cache --upgrade pip setuptools wheel
+  - if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi
+  # setup virtualenv
+  - pip install virtualenv
+  - virtualenv /tmp/virtenv
+  - source /tmp/virtenv/bin/activate
+  - docker -v
+  - python -V
+  - pip install ansible molecule docker
+  - ansible --version
+  - molecule --version
+
+.molecule: &molecule_job
+  stage: test
+  tags:
+    - docker
+
+molecule_centos7:
+  <<: *molecule_job
+  script:
+    - MOLECULE_DISTRO=centos7 molecule test
+
+molecule_ubuntu1604:
+  <<: *molecule_job
+  script:
+    - MOLECULE_DISTRO=ubuntu1604 molecule test
+
+molecule_ubuntu1804:
+  <<: *molecule_job
+  script:
+    - MOLECULE_DISTRO=ubuntu1804 molecule test

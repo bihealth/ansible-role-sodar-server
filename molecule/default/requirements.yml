@@ -1,0 +1,17 @@
+---
+
+- src: bihealth.basic_server
+- src: bihealth.redis
+- src: bihealth.memcached
+- src: bihealth.nginx
+- src: bihealth.postgres_client
+- src: bihealth.docker
+- src: bihealth.ssl_certs
+- src: bihealth.ssh_keys
+- src: bihealth.python3
+- src: bihealth.sodar_core_app
+# - name: bihealth.sodar_core_app  # useful during development
+#   src: git+https://github.com/bihealth/ansible-role-sodar-core-app.git
+#   version: master
+
+- src: bihealth.postgres_server
