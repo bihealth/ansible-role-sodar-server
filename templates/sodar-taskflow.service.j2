@@ -1,0 +1,36 @@
+[Unit]
+Description=Production version of sodar-taskflow
+Requires=redis.service
+Before=sodar-web.service
+After=redis.service
+
+[Service]
+WorkingDirectory=/srv/sodar-taskflow/{{ sodar_taskflow_version }}
+Environment="SODAR_TASKFLOW_SETTINGS=/srv/sodar-taskflow/{{ sodar_taskflow_version }}/config/production.py"
+Environment="TASKFLOW_IRODS_HOST={{ sodar_irods_host }}"
+Environment="TASKFLOW_IRODS_PORT={{ sodar_irods_port }}"
+Environment="TASKFLOW_IRODS_USER={{ sodar_irods_user }}"
+Environment="TASKFLOW_IRODS_PASS={{ sodar_irods_pass }}"
+Environment="TASKFLOW_IRODS_ALLOW_CLEANUP=0"
+Environment="TASKFLOW_SODAR_URL=http://127.0.0.1:8000"
+Environment="TASKFLOW_REDIS_URL=redis://127.0.0.1:6379"
+Environment="TASKFLOW_SODAR_SECRET={{ sodar_taskflow_secret }}"
+
+PIDFile=/var/run/sodar-taskflow-production.pid
+Type=forking
+KillMode=process
+Restart=always
+ExecStart=/srv/sodar-taskflow/{{ sodar_taskflow_version }}-venv/bin/gunicorn   \
+          --group nobody                                                       \
+          --user sodar-taskflow                                                \
+          --workers 8                                                          \
+          --bind=127.0.0.1:5005                                                \
+          --pid=/var/run/sodar-taskflow-production.pid                         \
+          --pythonpath=/srv/sodar-taskflow/{{ sodar_taskflow_version }}        \
+          --error-logfile=/var/log/sodar-taskflow/sodar-taskflow-production.error       \
+          --daemon                                                             \
+          sodar_taskflow:app                                                   \
+
+[Install]
+# When should this service be triggered? (this is the equivalent of SysV's runlevel 3)
+WantedBy=multi-user.target

@@ -11,6 +11,19 @@ sodar_core_app_build_docs: true
 sodar_core_vuejs_apps:
   - samplesheets
 
+sodar_core_app_systemd_env_snippet: |
+  IRODS_HOST={{ sodar_irods_host }}
+  IRODS_PORT={{ sodar_irods_port }}
+  IRODS_USER={{ sodar_irods_user }}
+  IRODS_PASS={{ sodar_irods_pass }}
+  IRODS_WEBDAV_ENABLED={{ sodar_irods_webdav_enabled }}
+  IRODS_WEBDAV_URL={{ sodar_irods_webdav_url }}
+  SODAR_API_DEFAULT_HOST={{ sodar_api_default_host }}
+  TASKFLOW_SODAR_SECRET={{ sodar_taskflow_secret }}
+  SODAR_EMAIL_SUBJECT_PREFIX={{ sodar_email_subject_prefix }}
+  SODAR_SITE_INSTANCE_TITLE={{ sodar_site_instance_title }}
+  SODAR_SITE_SUBTITLE={{ sodar_site_subtitle }}
+
 # bihealth.python3 --------------------------------------------------------------------------------
 
 python3_versions:

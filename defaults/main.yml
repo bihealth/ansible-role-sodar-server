@@ -1,5 +1,33 @@
 ---
 
+# REQUIRED Settings -------------------------------------------------------------------------------
+
+# The host of the irods user.
+# sodar_irods_host:
+
+# The port of the irods user.
+# sodar_irods_port:
+
+# The irods user to use.
+# sodar_irods_user:
+
+# Password for irods user.
+# sodar_irods_pass:
+
+# Enabling WebDAV
+# sodar_irods_webdav_enabled:
+
+# URL of WebDAV server
+# sodar_irods_webdav_url:
+
+# Default hostname for SODAR API
+# sodar_api_default_host:
+
+# Token with the secret for authenticating with taskflow.
+# sodar_taskflow_secret:
+
+# Other Settings (the defaults are sensible for most cases) ---------------------------------------
+
 # Also see the defaults of bihealth.sodar_core_app.
 
 # Git repository to get app from.
@@ -10,3 +38,6 @@ sodar_email_prefix: "[SODAR]"
 
 # Number of celery workers to spawn for the default queue.
 sodar_celery_workers: 8
+
+# SODAR Taskflow version
+sodar_taskflow_version: dev
