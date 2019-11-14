@@ -1,4 +1,24 @@
-# Omics Taskflow Service Installation =======================================
+---
+
+# SODAR-speceific setup =====================================================
+
+- name: Ensure iRODS certificate directory exists
+  file:
+    recurse: yes
+    state: directory
+    dest: /srv/sodar-web/{{ sodar_version }}/staticfiles/irods
+    owner: sodar
+    group: nobody
+
+- name: Create iRODS SSL certificate file
+  copy:
+    content: "{{ sodar_irods_ssl_cert }}"
+    dest: /srv/sodar-web/{{ sodar_version }}/staticfiles/irods/irods_server.crt
+    owner: sodar
+    group: nobody
+    mode: u=rw,go=r
+
+# SODAR Taskflow Service Installation =======================================
 
 - name: Create user for sodar-taskflow
   user:

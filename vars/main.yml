@@ -13,6 +13,7 @@ sodar_core_vuejs_apps:
 
 sodar_core_app_systemd_env_snippet: |
   IRODS_HOST={{ sodar_irods_host }}
+  IRODS_ZONE={{ sodar_irods_zone }}
   IRODS_PORT={{ sodar_irods_port }}
   IRODS_USER={{ sodar_irods_user }}
   IRODS_PASS={{ sodar_irods_pass }}

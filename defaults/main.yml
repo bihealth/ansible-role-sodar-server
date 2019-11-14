@@ -5,11 +5,17 @@
 # The host of the irods user.
 # sodar_irods_host:
 
+# The certificate to send, if any.
+# sodar_irods_ssl_cert:
+
 # The port of the irods user.
 # sodar_irods_port:
 
 # The irods user to use.
 # sodar_irods_user:
+
+# The irods zone to use.
+# sodar_irods_zone:
 
 # Password for irods user.
 # sodar_irods_pass:

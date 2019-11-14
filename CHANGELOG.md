@@ -1,5 +1,9 @@
 # Changelog
 
+## HEAD (unreleased)
+
+- More variables for iRODS configuration.
+
 ## v0.1.1
 
 - Add SODAR Taskflow deployment
