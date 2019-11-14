@@ -1,0 +1,79 @@
+# Omics Taskflow Service Installation =======================================
+
+- name: Create user for sodar-taskflow
+  user:
+    name: sodar-taskflow
+    home: /srv/sodar-taskflow
+    group: nobody
+
+- name: Ensure clone target exists
+  file:
+    state: directory
+    dest: "{{ item }}"
+    owner: sodar-taskflow
+    group: nobody
+  with_items:
+  - /srv/sodar-taskflow
+  - /srv/sodar-taskflow/{{ sodar_taskflow_version }}
+
+- name: Clone sodar-taskflow source code
+  git:
+    repo: 'git@cubi-gitlab.bihealth.org:CUBI_Engineering/CUBI_Data_Mgmt/sodar_taskflow.git'
+    dest: /srv/sodar-taskflow/{{ sodar_taskflow_version }}
+    version: '{{ sodar_taskflow_version }}'
+    accept_hostkey: true
+  notify: restart sodar-taskflow
+  register: clone_repo
+
+# Set up virtualenv =========================================================
+
+- name: Ensure virtual env target exists
+  file:
+    state: directory
+    dest: "{{ item }}"
+    owner: sodar-taskflow
+    group: nobody
+  with_items:
+  - /srv/sodar-taskflow
+  - /srv/sodar-taskflow/{{ sodar_taskflow_version }}-venv
+  notify: restart sodar-taskflow
+
+- name: Create virtualenv environment
+  shell: |
+    trap "rm -rf /srv/sodar-taskflow/{{ sodar_taskflow_version }}-venv" ERR
+    virtualenv -p /usr/bin/python3.6 /srv/sodar-taskflow/{{ sodar_taskflow_version }}-venv
+  args:
+    creates: /srv/sodar-taskflow/{{ sodar_taskflow_version }}-venv/bin/activate
+  notify: restart sodar-taskflow
+
+# Install project requirements in virtualenv ================================
+
+- name: Install project requirements in virtualenv
+  shell: |
+    source /srv/sodar-taskflow/{{ sodar_taskflow_version }}-venv/bin/activate
+    cd /srv/sodar-taskflow/{{ sodar_taskflow_version }}
+    pip install -r requirements.txt
+  when: clone_repo.changed
+  notify: restart sodar-taskflow
+
+# Register sodar-taskflow with systemd ======================================
+
+- name: Create directory for logs
+  file:
+    state: directory
+    dest: "/var/log/sodar-taskflow"
+    owner: sodar-taskflow
+    group: nobody
+
+- name: Install sodar-taskflow systemd unit file
+  template:
+    src: sodar-taskflow.service.j2
+    dest: /etc/systemd/system/sodar-taskflow.service
+  notify: restart sodar-taskflow
+
+- name: Start sodar-taskflow systemd unit
+  systemd:
+    state: started
+    name: sodar-taskflow
+    enabled: yes
+    daemon_reload: yes

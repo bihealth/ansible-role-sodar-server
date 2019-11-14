@@ -8,9 +8,11 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 
 def test_local_socket(host):
     assert host.socket("tcp://127.0.0.1:8000").is_listening
+    assert host.socket("tcp://127.0.0.1:8005").is_listening
 
 
 def test_external_socket(host):
     assert not host.socket("tcp://0.0.0.0:8000").is_listening
+    assert not host.socket("tcp://0.0.0.0:5005").is_listening
     assert host.socket("tcp://0.0.0.0:80").is_listening
     assert host.socket("tcp://0.0.0.0:443").is_listening
