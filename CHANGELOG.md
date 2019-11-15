@@ -3,6 +3,7 @@
 ## HEAD (unreleased)
 
 - More variables for iRODS configuration.
+- Adding special configuration for iRODS connection, e.g., SSL parameters.
 
 ## v0.1.1
 

@@ -12,6 +12,8 @@ sodar_core_vuejs_apps:
   - samplesheets
 
 sodar_core_app_systemd_env_snippet: |
+  IRODS_ENV_PATH=/srv/sodar-web/{{ sodar_version }}/staticfiles/irods/irods_server_env.json
+  IRODSINFO_ENV_PATH=/srv/sodar-web/{{ sodar_version }}/staticfiles/irods/irods_client_env.json
   IRODS_HOST={{ sodar_irods_host }}
   IRODS_ZONE={{ sodar_irods_zone }}
   IRODS_PORT={{ sodar_irods_port }}

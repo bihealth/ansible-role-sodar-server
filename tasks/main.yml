@@ -18,6 +18,41 @@
     group: nobody
     mode: u=rw,go=r
 
+- name: Create iRODS env path
+  copy:
+    content: |
+      {
+        "irods_client_server_negotiation": "request_server_negotiation",
+        "irods_client_server_policy": "CS_NEG_REQUIRE",
+        "irods_encryption_algorithm": "AES-256-CBC",
+        "irods_encryption_key_size": 32,
+        "irods_encryption_num_hash_rounds": 16,
+        "irods_encryption_salt_size": 8,
+        "irods_ssl_verify_server": "cert",
+        "irods_ssl_ca_certificate_file": "/srv/sodar-web/{{ sodar_version }}/staticfiles/irods/irods_server.crt"
+      }
+    dest: /srv/sodar-web/{{ sodar_version }}/staticfiles/irods/irods_server_env.json
+    owner: sodar
+    group: nobody
+    mode: u=rw,go=r
+
+- name: Create iRODS info env path
+  copy:
+    content: |
+      {
+        "irods_client_server_negotiation": "request_server_negotiation",
+        "irods_client_server_policy": "CS_NEG_REQUIRE",
+        "irods_encryption_algorithm": "AES-256-CBC",
+        "irods_encryption_key_size": 32,
+        "irods_encryption_num_hash_rounds": 16,
+        "irods_encryption_salt_size": 8,
+        "irods_ssl_verify_server": "cert"
+      }
+    dest: /srv/sodar-web/{{ sodar_version }}/staticfiles/irods/irods_client_env.json
+    owner: sodar
+    group: nobody
+    mode: u=rw,go=r
+
 # SODAR Taskflow Service Installation =======================================
 
 - name: Create user for sodar-taskflow
