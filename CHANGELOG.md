@@ -1,6 +1,6 @@
 # Changelog
 
-## HEAD (unreleased)
+## v0.2.0
 
 - More variables for iRODS configuration.
 - Adding special configuration for iRODS connection, e.g., SSL parameters.
