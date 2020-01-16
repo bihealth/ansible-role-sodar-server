@@ -27,6 +27,50 @@ sodar_core_app_systemd_env_snippet: |
   SODAR_SITE_INSTANCE_TITLE={{ sodar_site_instance_title }}
   SODAR_SITE_SUBTITLE={{ sodar_site_subtitle }}
 
+sodar_core_app_disable_cdn_includes: true
+
+sodar_core_app_custom_css_includes:
+  - url: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css
+    dest: "{{ sodar_core_app_static_local }}/local/css/font-awesome.min.css"
+    served_as: /static/local/css/font-awesome.min.css
+  - url: https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css
+    dest: "{{ sodar_core_app_static_local }}/local/css/bootstrap.min.css"
+    served_as: /static/local/css/bootstrap.min.css
+
+sodar_core_app_custom_js_includes:
+  - url: https://code.jquery.com/jquery-3.3.1.min.js
+    dest: "{{ sodar_core_app_static_local }}/local/js/jquery-3.3.1.min.js"
+    served_as: /static/local/js/jquery-3.3.1.min.js
+  - url: https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js
+    dest: "{{ sodar_core_app_static_local }}/local/js/popper.min.js"
+    served_as: /static/local/js/popper.min.js
+  - url: https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js
+    dest: "{{ sodar_core_app_static_local }}/local/js/bootstrap.min.js"
+    served_as: /static/local/js/bootstrap.min.js
+  - url: https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.4/js/tether.js
+    dest: "{{ sodar_core_app_static_local }}/local/js/tether.js"
+    served_as: /static/local/js/tether.js
+  - url: https://cdnjs.cloudflare.com/ajax/libs/shepherd/1.8.1/js/shepherd.min.js
+    dest: "{{ sodar_core_app_static_local }}/local/js/shepherd.min.js"
+    served_as: /static/local/js/shepherd.min.js
+  - url: https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js
+    dest: "{{ sodar_core_app_static_local }}/local/js/clipboard.min.js"
+    served_as: /static/local/js/clipboard.min.js
+
+sodar_core_app_custom_static_files:
+  - url: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/FontAwesome.otf
+    dest: "{{ sodar_core_app_static_local }}/local/fonts/FontAwesome.otf"
+  - url: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.eot
+    dest: "{{ sodar_core_app_static_local }}/local/fonts/fontawesome-webfont.eot"
+  - url: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.svg
+    dest: "{{ sodar_core_app_static_local }}/local/fonts/fontawesome-webfont.svg"
+  - url: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.ttf
+    dest: "{{ sodar_core_app_static_local }}/local/fonts/fontawesome-webfont.ttf"
+  - url: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.woff
+    dest: "{{ sodar_core_app_static_local }}/local/fonts/fontawesome-webfont.woff"
+  - url: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2
+    dest: "{{ sodar_core_app_static_local }}/local/fonts/fontawesome-webfont.woff2"
+
 # bihealth.python3 --------------------------------------------------------------------------------
 
 python3_versions:
