@@ -47,3 +47,6 @@ sodar_celery_workers: 8
 
 # SODAR Taskflow version
 sodar_taskflow_version: dev
+
+# Optional DSN for Sentry integration.
+sodar_sentry_dsn: ""
