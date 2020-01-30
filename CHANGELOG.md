@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.2
+
+- Adding support for sentry.
+
 ## v0.2.1
 
 - Downloading static files from CDN when deploying.
