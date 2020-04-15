@@ -38,18 +38,18 @@ sodar_core_app_custom_css_includes:
   - url: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css
     dest: "{{ sodar_core_app_static_local }}/local/css/font-awesome.min.css"
     served_as: /static/local/css/font-awesome.min.css
-  - url: https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css
+  - url: https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css
     dest: "{{ sodar_core_app_static_local }}/local/css/bootstrap.min.css"
     served_as: /static/local/css/bootstrap.min.css
 
 sodar_core_app_custom_js_includes:
-  - url: https://code.jquery.com/jquery-3.3.1.min.js
-    dest: "{{ sodar_core_app_static_local }}/local/js/jquery-3.3.1.min.js"
-    served_as: /static/local/js/jquery-3.3.1.min.js
-  - url: https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js
+  - url: https://code.jquery.com/jquery-3.4.1.min.js
+    dest: "{{ sodar_core_app_static_local }}/local/js/jquery-3.4.1.min.js"
+    served_as: /static/local/js/jquery-3.4.1.min.js
+  - url: https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js
     dest: "{{ sodar_core_app_static_local }}/local/js/popper.min.js"
     served_as: /static/local/js/popper.min.js
-  - url: https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js
+  - url: https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js
     dest: "{{ sodar_core_app_static_local }}/local/js/bootstrap.min.js"
     served_as: /static/local/js/bootstrap.min.js
   - url: https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.4/js/tether.js
