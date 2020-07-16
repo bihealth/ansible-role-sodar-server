@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.3
+
+- Update JS and CSS includes.
+
 ## v0.2.2
 
 - Adding support for sentry.
