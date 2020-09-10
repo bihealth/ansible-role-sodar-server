@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.4
+
+- Set up enabled backend plugins.
+
 ## v0.2.3
 
 - Update JS and CSS includes.
