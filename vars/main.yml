@@ -4,6 +4,7 @@
 
 sodar_core_app_name: sodar
 sodar_core_app_git_repo: "{{ sodar_git_repo }}"
+sodar_core_app_backend_plugins: "{{ sodar_backend_plugins }}"
 sodar_core_app_email_prefix: "{{ sodar_email_prefix }}"
 sodar_core_app_celery_enabled: true
 sodar_core_app_celery_workers_default: "{{ sodar_celery_workers }}"
