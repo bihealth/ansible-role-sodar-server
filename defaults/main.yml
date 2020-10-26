@@ -40,7 +40,7 @@
 sodar_git_repo: "git@cubi-gitlab.bihealth.org:CUBI_Engineering/CUBI_Data_Mgmt/sodar.git"
 
 # Enabled backend plugins
-sodar_backend_plugins: [timeline_backend, taskflow, omics_irods, sodar_cache]
+sodar_backend_plugins: [timeline_backend, taskflow, omics_irods, sodar_cache, ontologyaccess_backend]
 
 # Tag to use for email prefix.
 sodar_email_prefix: "[SODAR]"
