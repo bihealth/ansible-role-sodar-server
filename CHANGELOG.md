@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.5
+
+- Add ontologyaccess backend plugin.
+
 ## v0.2.4
 
 - Set up enabled backend plugins.
