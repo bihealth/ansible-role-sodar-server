@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.7
+
+- Fix `SITE_INSTANCE_TITLE` and `SITE_SUBTITLE` env vars (#7)
+
 ## v0.2.6
 
 - Upgrade to Bootstrap v4.5.3 and jQuery v3.5.1.
