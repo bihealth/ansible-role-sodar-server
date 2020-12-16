@@ -30,8 +30,8 @@ sodar_core_app_systemd_env_snippet: |
   SODAR_API_DEFAULT_HOST={{ sodar_api_default_host }}
   TASKFLOW_SODAR_SECRET={{ sodar_taskflow_secret }}
   SODAR_EMAIL_SUBJECT_PREFIX={{ sodar_email_subject_prefix }}
-  SODAR_SITE_INSTANCE_TITLE={{ sodar_site_instance_title }}
-  SODAR_SITE_SUBTITLE={{ sodar_site_subtitle }}
+  SITE_INSTANCE_TITLE={{ sodar_site_instance_title }}
+  SITE_SUBTITLE={{ sodar_site_subtitle }}
 
 sodar_core_app_disable_cdn_includes: true
 
